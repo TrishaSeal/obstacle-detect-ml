@@ -21,5 +21,25 @@ def copyFilesOver(source, dest, fileList):
 		shutil.copy(sourcePath, destPath)
 
 
-copyFilesOver(rawImageDir, trainImageDir, trainAnnotPath)
-copyFilesOver(rawImageDir, validImageDir, validAnnotPath)
+#copyFilesOver(rawImageDir, trainImageDir, trainAnnotPath)
+#copyFilesOver(rawImageDir, validImageDir, validAnnotPath)
+
+trainRecordPath = '../Dataset/road_coco/records/train'
+validRecordPath = '../Dataset/road_coco/records/valid'
+
+def createRecord(imageDir, annotPath, recordPath):
+	cmd = [
+		"python3 -m official.vision.data.create_coco_tf_record ",
+		"--logtostderr ",
+		"--image_dir=\"" + imageDir + "\" ",
+		"--object_annotations_file=\"" + annotPath + "\" ",
+		"--output_file_prefix=\"" + recordPath + "\" ",
+		"--num_shards=1"
+	]
+	fullcmd = ""
+	for c in cmd:
+		fullcmd += c
+	os.system(fullcmd)
+
+createRecord(trainImageDir, trainAnnotPath, trainRecordPath)
+createRecord(validImageDir, validAnnotPath, validRecordPath)
