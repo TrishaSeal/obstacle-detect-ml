@@ -6,8 +6,10 @@ import shutil
 rawImageDir = "../Dataset/road_coco/images"
 trainImageDir = "../Dataset/road_coco/target/train"
 validImageDir = "../Dataset/road_coco/target/valid"
+testImageDir = "../Dataset/Testing Frames"
 trainAnnotPath = "../Dataset/road_coco/annotations/train.json"
 validAnnotPath = "../Dataset/road_coco/annotations/valid.json"
+testAnnotPath = "../Dataset/Testing Frames/test.json"
 
 def copyFilesOver(source, dest, fileList):
 	file = open(fileList)
@@ -26,6 +28,7 @@ def copyFilesOver(source, dest, fileList):
 
 trainRecordPath = '../Dataset/road_coco/records/train'
 validRecordPath = '../Dataset/road_coco/records/valid'
+testRecordPath = '../Dataset/road_coco/records/test'
 
 def createRecord(imageDir, annotPath, recordPath):
 	cmd = [
@@ -41,5 +44,6 @@ def createRecord(imageDir, annotPath, recordPath):
 		fullcmd += c
 	os.system(fullcmd)
 
-createRecord(trainImageDir, trainAnnotPath, trainRecordPath)
-createRecord(validImageDir, validAnnotPath, validRecordPath)
+# createRecord(trainImageDir, trainAnnotPath, trainRecordPath)
+# createRecord(validImageDir, validAnnotPath, validRecordPath)
+createRecord(testImageDir, testAnnotPath, testRecordPath)
