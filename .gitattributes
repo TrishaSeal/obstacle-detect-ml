@@ -1,0 +1,7 @@
+export-model/params.yaml filter=lfs diff=lfs merge=lfs -text
+export-model/saved_model.pb filter=lfs diff=lfs merge=lfs -text
+export-model/variables filter=lfs diff=lfs merge=lfs -text
+export-model/assets filter=lfs diff=lfs merge=lfs -text
+export-model/fingerprint.pb filter=lfs diff=lfs merge=lfs -text
+export-model/variables/variables.data-00000-of-00001 filter=lfs diff=lfs merge=lfs -text
+export-model/variables/variables.index filter=lfs diff=lfs merge=lfs -text
