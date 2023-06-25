@@ -1,12 +1,30 @@
 # obstacle-detect-ml
 Obstacle Detection AI built using TensorFlow
 
-## Required Python Libraries
-* Tensorflow
-* Keras
-* PIL
-* zDrive
-* jupyter (optional for using codeTesting.ipynb)
+## Required Python Dependencies
+`pprint`
+: Pretty Printer
+
+`numpy`
+: Standard helper library used by TensorFlow
+
+`matplotlib`
+: Plotting and visualisation library
+
+`opencv`
+: Open ComputerVision Library
+
+`tensorflow`
+: Main Machine Learning Library used
+
+`tf-models-official`
+: Tensorflow Model Garden
+
+`flask`
+: Web Application Hosting Library
+
+## Optional Dependencies
+* `jupyter` - Optional dependency for testing codePlayground.ipynb
 
 ## Datasets Link
 - [ ] [Drive Folder](https://drive.google.com/drive/folders/11vAHy_ZGVF3J0FgP5njY5B_Qx2BlrKy3)
