@@ -5,6 +5,8 @@ from werkzeug.utils import secure_filename
 import os
 from wtforms.validators import InputRequired
 
+from datasetManage import createRecord
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['UPLOAD_FOLDER'] = 'static/files'
@@ -21,6 +23,7 @@ def home():
         file = form.file.data 
         fileExt = file.filename.split('.')[1]
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],'test' + "." + fileExt))
+        createRecord('./static/files/', './static/files/test.json', './static/files/test')
         os.system("python createEmptyAnnot.py")
     return render_template('mainpage.html', form=form)
 
