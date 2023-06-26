@@ -1,21 +1,17 @@
-import os
 import json
+from PIL import Image
 
 annotContent = {}
 
 imageList = []
-imagePath = "../Dataset/Testing Frames/"
-i = 0
-for root, folders, im in os.walk(imagePath):
-	for image in im:
-		imInfo = {
-			"file_name": image,
-			"height": 1080,
-			"width": 1920,
-			"id": i
-		}
-		imageList.append(imInfo.copy())
-		i += 1
+image = Image.open("./static/files/test.jpg")
+imInfo = {
+	"file_name": "test.jpg",
+	"height": image.size[1],
+	"width": image.size[0],
+	"id": 0
+}
+imageList.append(imInfo)
 
 print(imageList)
 
@@ -47,7 +43,7 @@ annotContent["categories"] = [\
 
 enc = json.encoder.JSONEncoder()
 fileContent = enc.encode(annotContent)
-filePath = "../Dataset/Testing Frames/test.json"
+filePath = "./static/files/test.json"
 
 with open(filePath, mode = "w") as file:
 	file.write(fileContent)

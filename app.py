@@ -21,6 +21,7 @@ def home():
         file = form.file.data 
         fileExt = file.filename.split('.')[1]
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],'test' + "." + fileExt))
+        os.system("python createEmptyAnnot.py")
     return render_template('mainpage.html', form=form)
 
 if __name__ == '__main__':
