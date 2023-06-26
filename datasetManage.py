@@ -46,4 +46,4 @@ def createRecord(imageDir, annotPath, recordPath):
 
 # createRecord(trainImageDir, trainAnnotPath, trainRecordPath)
 # createRecord(validImageDir, validAnnotPath, validRecordPath)
-createRecord(testImageDir, testAnnotPath, testRecordPath)
+# createRecord(testImageDir, testAnnotPath, testRecordPath)
