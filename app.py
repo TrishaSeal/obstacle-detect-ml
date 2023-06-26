@@ -19,7 +19,8 @@ def home():
     form = UploadFileForm()
     if form.validate_on_submit():
         file = form.file.data 
-        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
+        fileExt = file.filename.split('.')[1]
+        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],'test' + "." + fileExt))
     return render_template('mainpage.html', form=form)
 
 if __name__ == '__main__':
