@@ -3,6 +3,8 @@ import os
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
 # Integrating exported model into web app
+# @~Trisha: This section will need to be commented out, just uncomment the lines with triple set of double quotes to comment it out
+#"""
 import numpy as np
 from PIL import Image
 import tensorflow as tf
@@ -74,6 +76,7 @@ def make_prediction():
 		outputFile = Image.fromarray(output)
 		outputFile.save('./static/files/output.png')
 
+#"""
 
 # Initiating web app
 from flask import Flask, render_template
