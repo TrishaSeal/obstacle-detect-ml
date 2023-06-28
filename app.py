@@ -8,15 +8,20 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 import numpy as np
 from PIL import Image
 import tensorflow as tf
+import tensorflow_models as tfm
 
+from official.core import exp_factory
 from official.vision.ops.preprocess_ops import resize_and_crop_image
 from official.vision.utils.object_detection import visualization_utils
 from official.vision.dataloaders.tf_example_decoder import TfExampleDecoder
 
 
-model = tf.saved_model.load('./export-model/')
-modelFn = model.signatures['serving_default']
+HEIGHT, WIDTH = 256, 256
+IMGSIZE = [HEIGHT, WIDTH, 3]
+
+model = tf.saved_model.load('./export-model/').signatures["serving_default"]
 tfExDecoder = TfExampleDecoder()
+
 
 categoryIndex = {
 	0: {
@@ -48,8 +53,8 @@ def build_inputs_for_object_detection(image, input_image_size):
 	return image
 
 def make_prediction():
-	testDs = tf.data.TFRecordDataset('./static/files/test-00000-of-00001.tfrecord')
-	inputImageSize = (256, 256)
+	testDs = tf.data.TFRecordDataset('./static/files/test-00000-of-00001.tfrecord').take(1)
+	inputImageSize = (HEIGHT, WIDTH)
 	minScore = 0.3
 
 	for _, image in enumerate(testDs):
@@ -57,8 +62,9 @@ def make_prediction():
 		image = build_inputs_for_object_detection(decoded['image'], inputImageSize)
 		image = tf.expand_dims(image, axis = 0)
 		image = tf.cast(image, dtype = tf.uint8)
-		pred = modelFn(image)
+		pred = model(image)
 
+		print("Prediction made")
 		output = visualization_utils.visualize_boxes_and_labels_on_image_array(
 			image[0].numpy(),
 			pred['detection_boxes'][0].numpy(),
@@ -74,7 +80,7 @@ def make_prediction():
 		)
 
 		outputFile = Image.fromarray(output)
-		outputFile.save('./static/files/output.png')
+		outputFile.save('./static/files/output.jpg')
 
 #"""
 
@@ -95,17 +101,26 @@ class UploadFileForm(FlaskForm):
 	file = FileField("File", validators=[InputRequired()])
 	submit = SubmitField("Upload File")
 
-@app.route('/', methods=['GET',"POST"])
-@app.route('/home', methods=['GET',"POST"])
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def home():
 	form = UploadFileForm()
 	if form.validate_on_submit():
 		file = form.file.data 
-		fileExt = file.filename.split('.')[1]
-		file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],'test' + "." + fileExt))
-		createRecord('./static/files/', './static/files/test.json', './static/files/test')
+		file.save("/static/files/test.jpg")
 		os.system("python createEmptyAnnot.py")
 	return render_template('mainpage.html', form=form)
 
+@app.route('/result', methods=['GET',"POST"])
+def disp_result():
+	form = UploadFileForm()
+	if form.validate_on_submit():
+		file = form.file.data 
+		file.save("./static/files/test.jpg")
+		os.system("python createEmptyAnnot.py")
+	createRecord('./static/files/', './static/files/test.json', './static/files/test')
+	make_prediction()
+	return render_template('outputpage.html')
+
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run()
