@@ -15,7 +15,9 @@ Obstacle Detection AI built using TensorFlow
 `tf-models-official`
 : Tensorflow Model Garden  
 `flask`
-: Web Application Hosting Library
+: Web Application Hosting Library  
+`flask-wtf`
+: Forms support for Flask
 
 ## Optional Dependencies
 `jupyter`
