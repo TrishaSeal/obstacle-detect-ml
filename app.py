@@ -16,7 +16,7 @@ from official.vision.utils.object_detection import visualization_utils
 from official.vision.dataloaders.tf_example_decoder import TfExampleDecoder
 
 
-HEIGHT, WIDTH = 256, 256
+HEIGHT, WIDTH = 512, 512
 IMGSIZE = [HEIGHT, WIDTH, 3]
 
 model = tf.saved_model.load('./export-model/').signatures["serving_default"]
