@@ -5,3 +5,4 @@ export-model/assets filter=lfs diff=lfs merge=lfs -text
 export-model/fingerprint.pb filter=lfs diff=lfs merge=lfs -text
 export-model/variables/variables.data-00000-of-00001 filter=lfs diff=lfs merge=lfs -text
 export-model/variables/variables.index filter=lfs diff=lfs merge=lfs -text
+On-road[[:space:]]obstacle[[:space:]]detect[[:space:]]demo.mp4 filter=lfs diff=lfs merge=lfs -text
