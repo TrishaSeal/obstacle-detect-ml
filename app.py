@@ -20,7 +20,7 @@ HEIGHT, WIDTH = 256, 256
 IMGSIZE = [HEIGHT, WIDTH, 3]
 
 model = tf.saved_model.load('./export-model/').signatures["serving_default"]
-
+#dffdfdf
 
 tfExDecoder = TfExampleDecoder()
 
